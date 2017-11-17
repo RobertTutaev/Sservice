@@ -10,9 +10,13 @@ python -m venv myvenv
 ======
 python manage.py inspectdb > smain/models.py
 
-Создание таблиц в BD для работы стандартных модулей Django
+Выполнение migrate - создание таблиц в BD
 ======
 python manage.py migrate
+
+Создание migrate
+======
+python manage.py makemigrations
 
 Установка Django
 ======

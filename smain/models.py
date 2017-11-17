@@ -9,26 +9,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
-
-    def __str__(self):
-        return self.username
+from django.contrib.auth.models import User
 
 class SDb(models.Model):
     name = models.CharField(unique=True, max_length=100, null=True, verbose_name='Название')
@@ -50,7 +31,7 @@ class SDb(models.Model):
 
 
 class SAuthUserDb(models.Model):
-    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, null=True, verbose_name='Пользователь')
+    auth_user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
     s_db = models.ForeignKey('SDb', models.DO_NOTHING, null=True, verbose_name='БД')
 
     class Meta:
@@ -64,7 +45,7 @@ class SAuthUserDb(models.Model):
 
 
 class SAuthUserService(models.Model):
-    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, null=True, verbose_name='Пользователь')
+    auth_user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
     s_service = models.ForeignKey('SService', models.DO_NOTHING, null=True, verbose_name='Сервис')    
 
     class Meta:
