@@ -1,0 +1,9 @@
+/.vscode
+*.pyc
+*~
+__pycache__
+/myvenv
+/static
+
+Thumbs.db
+!/**/*Thumbs.db
