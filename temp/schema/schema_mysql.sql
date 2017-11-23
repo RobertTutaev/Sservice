@@ -1,6 +1,6 @@
-create database if not exists sservice;
+create database if not exists app;
 
-use sservice;
+use app;
 
 create table s_db(
     id integer primary key auto_increment,
