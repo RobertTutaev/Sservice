@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SmainConfig(AppConfig):
-    name = 'smain'
+class ServiceConfig(AppConfig):
+    name = 'service'
     verbose_name = 'Сервисы'

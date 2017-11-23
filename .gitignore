@@ -3,6 +3,7 @@
 *~
 __pycache__
 /myvenv
+/pyvenv
 /static
 
 Thumbs.db

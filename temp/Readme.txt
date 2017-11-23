@@ -8,7 +8,7 @@ python -m venv myvenv
 
 Модели из DB
 ======
-python manage.py inspectdb > smain/models.py
+python manage.py inspectdb > service/models.py
 
 Выполнение migrate - создание таблиц в BD
 ======
@@ -50,3 +50,4 @@ https://habrahabr.ru/post/282874/
 https://learn-reactjs.ru/basics/introduction-to-jsx
 https://tutorial.djangogirls.org/ru/django_start_project/
 https://habrahabr.ru/post/313764/
+https://www.youtube.com/watch?v=8SXwQ_7VTYM

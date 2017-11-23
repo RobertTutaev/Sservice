@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+TEMPLATE_DIRS = [
+    '/Sservice/service/templates',
+]
 
 # Application definition
 
@@ -37,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'smain'
+    'service'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +82,7 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'app',
+        'NAME': 'sservice',
         'USER': 'root',
         'PASSWORD': 'electric@000',
         'HOST': 'localhost',
