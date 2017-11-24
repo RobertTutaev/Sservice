@@ -4,7 +4,7 @@
 __pycache__
 /myvenv
 /pyvenv
-/static
+/static/js/assets/bower_components
 
 Thumbs.db
 !/**/*Thumbs.db

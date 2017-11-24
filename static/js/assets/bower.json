@@ -1,0 +1,23 @@
+{
+  "name": "assets",
+  "homepage": "https://github.com/RobertTutaev/Sservice",
+  "description": "",
+  "main": "",
+  "keywords": [
+    "sservice"
+  ],
+  "authors": [
+    "Robert Tutaev"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

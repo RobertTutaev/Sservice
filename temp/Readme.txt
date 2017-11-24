@@ -51,3 +51,7 @@ https://learn-reactjs.ru/basics/introduction-to-jsx
 https://tutorial.djangogirls.org/ru/django_start_project/
 https://habrahabr.ru/post/313764/
 https://www.youtube.com/watch?v=8SXwQ_7VTYM
+
+Иконки
+=======
+https://icons8.ru/icon/set/%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81/all

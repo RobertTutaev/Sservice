@@ -9,3 +9,7 @@ from django.shortcuts import render_to_response
 def index(request):
     view = "index"
     return render_to_response('index.html', {'name': view})
+
+def about(request):
+    view = "index"
+    return render_to_response('about.html', {'name': view})
