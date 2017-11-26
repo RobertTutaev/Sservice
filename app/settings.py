@@ -27,10 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-TEMPLATE_DIRS = [
-    '/Sservice/service/templates',
-]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,7 +54,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'service/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
