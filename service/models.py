@@ -18,7 +18,7 @@ class SDb(models.Model):
     p_username = models.CharField(max_length=100, null=True, verbose_name='Пользователь')
     p_password = models.CharField(max_length=100, null=True, verbose_name='Пароль')
     comment = models.TextField(blank=True, null=True, verbose_name='Коментарий')
-    checked = models.BooleanField(verbose_name='Вкл.', default=1)
+    checked = models.BooleanField(verbose_name='Вкл.', default=True)
 
     class Meta:
         managed = True
@@ -92,7 +92,7 @@ class SQuery(models.Model):
 class SService(models.Model):
     name = models.CharField(unique=True, max_length=100, null=True, verbose_name='Название')
     comment = models.TextField(blank=True, null=True, verbose_name='Комментарий')
-    checked = models.BooleanField(verbose_name='Вкл.', default=1)
+    checked = models.BooleanField(verbose_name='Вкл.', default=True)
 
     class Meta:
         managed = True

@@ -32,8 +32,8 @@ class SPageAdmin(admin.ModelAdmin):
     readonly_fields = ('user',)
 
     def save_model(self, request, obj, form, change):
-        if not change:
-            obj.created_by = request.user
+        #if not change:
+        obj.user = request.user
         obj.save()
 
     def get_actions(self, request):

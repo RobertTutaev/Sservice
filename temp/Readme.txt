@@ -16,7 +16,7 @@ python manage.py migrate
 
 Создание migrate
 ======
-python manage.py makemigrations
+python manage.py makemigrations service
 
 Установка Django
 ======

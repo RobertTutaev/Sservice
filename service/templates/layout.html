@@ -40,8 +40,8 @@
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                  <li{% if request.path == '/' %} class="active"{% endif %}><a href="/">Главная</a></li>
-                  <li{% if request.path == '/about' %} class="active"{% endif %}><a href="about">О ПО</a></li>
+                  <li{% if request.path == '/' %} class="active"{% endif %}><a href="{% url '/' %}">Главная</a></li>
+                  <li{% if request.path == '/about' %} class="active"{% endif %}><a href="{% url '/about' %}">О приложении</a></li>
                   <li><a href="#contact">Контакты</a></li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
