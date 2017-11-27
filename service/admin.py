@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import SAuthUserDb, SAuthUserService, SDb, SLog, SQuery, SService, SType
+from .models import SUserDb, SUserService, SDb, SLog, SQuery, SService, SType, SPage
 
 class SDbAdmin(admin.ModelAdmin):
     list_display = ('name', 'p_host', 'p_name', 'checked')
@@ -26,27 +26,47 @@ class SLogAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+class SPageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'user')
+    search_fields = ('name',)
+    readonly_fields = ('user',)
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.created_by = request.user
+        obj.save()
+
+    def get_actions(self, request):
+        actions = super(SPageAdmin, self).get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 class SQueryAdmin(admin.ModelAdmin):
     list_display = ('name', 's_service', 'priority')
     search_fields = ('name', 's_service__name')
 
-class SAuthUserServiceAdmin(admin.ModelAdmin):
-    list_display = ('auth_user', 's_service')
-    search_fields = ('auth_user__username', 's_service__name')
+class SUserServiceAdmin(admin.ModelAdmin):
+    list_display = ('user', 's_service')
+    search_fields = ('user__username', 's_service__name')
 
-class SAuthUserDbAdmin(admin.ModelAdmin):
-    list_display = ('auth_user', 's_db')
-    search_fields = ('auth_user__username', 's_db__name')
+class SUserDbAdmin(admin.ModelAdmin):
+    list_display = ('user', 's_db')
+    search_fields = ('user__username', 's_db__name')
 
 class SServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'checked')
     search_fields = ('name', )
 
-admin.site.register(SAuthUserDb, SAuthUserDbAdmin)
-admin.site.register(SAuthUserService, SAuthUserServiceAdmin)
+admin.site.register(SUserDb, SUserDbAdmin)
+admin.site.register(SUserService, SUserServiceAdmin)
 admin.site.register(SDb, SDbAdmin)
 admin.site.register(SLog, SLogAdmin)
 admin.site.register(SQuery, SQueryAdmin)
 admin.site.register(SService, SServiceAdmin)
+admin.site.register(SPage, SPageAdmin)
 admin.site.register(SType)

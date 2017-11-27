@@ -18,11 +18,11 @@ class SDb(models.Model):
     p_username = models.CharField(max_length=100, null=True, verbose_name='Пользователь')
     p_password = models.CharField(max_length=100, null=True, verbose_name='Пароль')
     comment = models.TextField(blank=True, null=True, verbose_name='Коментарий')
-    checked = models.BooleanField(blank=True, verbose_name='Вкл.')
+    checked = models.BooleanField(verbose_name='Вкл.', default=1)
 
     class Meta:
-        managed = False
-        db_table = 's_db'
+        managed = True
+        db_table = 'service_db'
         verbose_name = 'БД'
         verbose_name_plural = 'БД'
 
@@ -30,27 +30,27 @@ class SDb(models.Model):
         return self.name 
 
 
-class SAuthUserDb(models.Model):
-    auth_user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
+class SUserDb(models.Model):
+    user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
     s_db = models.ForeignKey('SDb', models.DO_NOTHING, null=True, verbose_name='БД')
 
     class Meta:
-        managed = False
-        db_table = 's_auth_user_db'
+        managed = True
+        db_table = 'service_user_db'
         verbose_name = 'Пользователь <=> БД'
         verbose_name_plural = 'Пользователи <=> БД'
 
     def __str__(self):
-        return '{0.auth_user} <=> {0.s_db}'.format(self)
+        return '{0.user} <=> {0.s_db}'.format(self)
 
 
-class SAuthUserService(models.Model):
-    auth_user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
+class SUserService(models.Model):
+    user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
     s_service = models.ForeignKey('SService', models.DO_NOTHING, null=True, verbose_name='Сервис')    
 
     class Meta:
-        managed = False
-        db_table = 's_auth_user_service'
+        managed = True
+        db_table = 'service_user_service'
         verbose_name = 'Пользователь <=> Сервис'
         verbose_name_plural = 'Пользователи <=> Сервисы'
 
@@ -60,8 +60,8 @@ class SLog(models.Model):
     dt = models.DateTimeField(null=True, verbose_name='Дата и время')
 
     class Meta:
-        managed = False
-        db_table = 's_log'
+        managed = True
+        db_table = 'service_log'
         verbose_name = 'Лог'
         verbose_name_plural = 'Лог'
         ordering = ['-dt']
@@ -80,8 +80,8 @@ class SQuery(models.Model):
     result = models.CharField(max_length=255, blank=True, null=True, verbose_name='Значение ответа')
 
     class Meta:
-        managed = False
-        db_table = 's_query'
+        managed = True
+        db_table = 'service_query'
         verbose_name = 'Запрос'
         verbose_name_plural = 'Запросы'
 
@@ -92,11 +92,11 @@ class SQuery(models.Model):
 class SService(models.Model):
     name = models.CharField(unique=True, max_length=100, null=True, verbose_name='Название')
     comment = models.TextField(blank=True, null=True, verbose_name='Комментарий')
-    checked = models.BooleanField(blank=True, verbose_name='Вкл.')
+    checked = models.BooleanField(verbose_name='Вкл.', default=1)
 
     class Meta:
-        managed = False
-        db_table = 's_service'
+        managed = True
+        db_table = 'service_service'
         verbose_name = 'Сервис'
         verbose_name_plural = 'Сервисы'
 
@@ -108,10 +108,24 @@ class SType(models.Model):
     name = models.CharField(unique=True, max_length=255, null=True, verbose_name='Название')    
 
     class Meta:
-        managed = False
-        db_table = 's_type'
+        managed = True
+        db_table = 'service_type'
         verbose_name = 'Тип обработки запросов'
         verbose_name_plural = 'Типы обработки запросов'
+
+    def __str__(self):
+        return self.name
+
+class SPage(models.Model):
+    name = models.CharField(max_length=100, null=True, verbose_name='Название')
+    content = models.TextField(blank=True, null=True, verbose_name='Содержание')
+    user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
+
+    class Meta:
+        managed = True
+        db_table = 'service_page'
+        verbose_name = 'Страница'
+        verbose_name_plural = 'Страницы'
 
     def __str__(self):
         return self.name
