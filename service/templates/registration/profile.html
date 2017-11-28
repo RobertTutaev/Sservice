@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+     
+  <h1>Профиль</h1>
+  <table class="form-login">
+    <tr>
+      <td>Логин: </td>
+      <td><b>{{ user.username  }}</b></td>
+    </tr>
+    <tr>
+      <td>Email: </td>
+      <td><b>{{ user.email }}</b></td>
+    </tr>
+    <tr>
+      <td>Имя: </td>
+      <td><b>{{ user.first_name }}</b></td>
+    </tr>
+    <tr>
+      <td>Фамилия: </td>
+      <td><b>{{ user.last_name }}</b></td>
+    </tr>    
+  </table>
+  <a class="btn btn-lg btn-primary" href="{% url 'logout' %}?next=/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a>
+
+{% endblock %}

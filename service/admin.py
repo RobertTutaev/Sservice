@@ -27,9 +27,10 @@ class SLogAdmin(admin.ModelAdmin):
         return False
 
 class SPageAdmin(admin.ModelAdmin):
+    fields = ('name', 'content', 'user')
     list_display = ('name', 'user')
     search_fields = ('name',)
-    readonly_fields = ('user',)
+    readonly_fields = ('name', 'user')
 
     def save_model(self, request, obj, form, change):
         #if not change:
@@ -41,6 +42,9 @@ class SPageAdmin(admin.ModelAdmin):
         if 'delete_selected' in actions:
             del actions['delete_selected']
         return actions
+
+    def has_add_permission(self, request):
+        return False
 
     def has_delete_permission(self, request, obj=None):
         return False

@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="jumbotron">
-        {% autoescape off %}
-        {{ page.content|safe }}
-        {% endautoescape %}
-    </div>
+    
+    {% autoescape off %}
+    {{ page.content|safe }}
+    {% endautoescape %}
+
 {% endblock %}
