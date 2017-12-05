@@ -58,10 +58,10 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                   {% if user.is_authenticated %}
-                    <li><a href="{% url '/profile' %}"><span class="glyphicon glyphicon-user"></span></a></li>
+                    <li{% if request.path == '/profile' %} class="active"{% endif %}><a href="{% url '/profile' %}"><span class="glyphicon glyphicon-user"></span></a></li>
                     <li><a href="{% url 'logout' %}?next=/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
                   {% else %}
-                    <li><a href="{% url 'login' %}?next={{request.path}}"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
+                    <li{% if request.path == '/accounts/login/' %} class="active"{% endif %}><a href="{% url 'login' %}?next={{request.path}}"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
                   {% endif %}                  
                 </ul>
               </div><!--/.nav-collapse -->

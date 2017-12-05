@@ -1,26 +1,35 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-     
-  <h1>Профиль</h1>
-  <table class="form-login">
-    <tr>
-      <td>Логин: </td>
-      <td><b>{{ user.username  }}</b></td>
-    </tr>
-    <tr>
-      <td>Email: </td>
-      <td><b>{{ user.email }}</b></td>
-    </tr>
-    <tr>
-      <td>Имя: </td>
-      <td><b>{{ user.first_name }}</b></td>
-    </tr>
-    <tr>
-      <td>Фамилия: </td>
-      <td><b>{{ user.last_name }}</b></td>
-    </tr>    
-  </table>
-  <a class="btn btn-lg btn-primary" href="{% url 'logout' %}?next=/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a>
+
+  <div class="row">
+    <div class="col-xs-4"><h1>Профиль</h1></div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-1">Логин: </div>
+    <div class="col-xs-3"><b>{{ user.username  }}</b></div> 
+  </div>
+
+  <div class="row">
+    <div class="col-xs-1">Email: </div>
+    <div class="col-xs-3"><b>{{ user.email }}</b></div> 
+  </div>
+
+  <div class="row">
+    <div class="col-xs-1">Имя: </div>
+    <div class="col-xs-3"><b>{{ user.first_name }}</b></div> 
+  </div>
+
+  <div class="row">
+    <div class="col-xs-1">Фамилия: </div>
+    <div class="col-xs-3"><b>{{ user.last_name }}</b></div> 
+  </div>
+
+  <br>
+  
+  <div class="row">
+    <div class="col-xs-4"><a class="btn btn-lg btn-primary" href="{% url 'logout' %}?next=/"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></div>
+  </div> 
 
 {% endblock %}
