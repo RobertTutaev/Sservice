@@ -10,6 +10,10 @@ python -m venv myvenv
 ======
 python manage.py inspectdb > service/models.py
 
+Выполнение первичное создание таблиц в BD
+======
+python manage.py sincdb
+
 Выполнение migrate - создание таблиц в BD
 ======
 python manage.py migrate

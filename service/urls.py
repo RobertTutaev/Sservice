@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^about$', views.about, name='/about'),
     url(r'^contacts$', views.contacts, name='/contacts'),
     url(r'^profile', views.profile, name='/profile'),
-    url(r'^services$', views.services, name='/services'),
+    url(r'^service/(?P<id>\d+)$', views.service, name='/service'),
 ]

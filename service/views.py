@@ -9,7 +9,13 @@ from service.models import SPage, SUserService, SService
 
 def index(request):
     sPage = get_object_or_404(SPage, id=1)
-    return render(request, 'page.html', {'page': sPage})
+
+    if request.user.is_authenticated():
+        services = SService.objects.filter(suserservice__user=request.user)
+    else:
+        services = SService.objects.none()
+    
+    return render(request, 'page.html', {'page': sPage, 'services': services})
 
 def about(request):
     sPage = get_object_or_404(SPage, id=2)
@@ -34,3 +40,9 @@ def services(request):
     services = SService.objects.filter(suserservice__user=request.user)
     
     return render(request, 'services.html', {'services': services})
+
+@login_required
+def service(request, id):
+    service = SService.objects.filter(pk=id, suserservice__user=request.user).first()
+    
+    return render(request, 'service.html', {'service': service})
