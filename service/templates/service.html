@@ -6,10 +6,20 @@
       <div class="panel-heading">
         <h3 class="panel-title"><a href="">{{ service.name }}</a></h3>
       </div>
-      <div class="panel-body">        
+      <div class="panel-body">
         Id: {{ service.id }}
         <br>
         {{ service.comment }}
+
+        <form method="post" action="">
+          {% csrf_token %}
+          <br>
+          <table class="">
+              {{ form.as_table }}
+              <td><input type="hidden" name="next" value="{{ next }}" /></td>
+              <td><input type="submit" class="btn btn-primary" value="Выполнить" /></td>
+          </table>
+        </form>
       </div>
     </div>
 

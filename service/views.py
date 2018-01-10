@@ -4,6 +4,7 @@ from django.template import Context
 from django.contrib.auth.decorators import login_required
 
 from service.models import SPage, SUserService, SService
+from service.forms.main import ServiceForm
 
 # Create your views here.
 
@@ -44,5 +45,6 @@ def services(request):
 @login_required
 def service(request, id):
     service = SService.objects.filter(pk=id, suserservice__user=request.user).first()
+    form = ServiceForm()
     
-    return render(request, 'service.html', {'service': service})
+    return render(request, 'service.html', {'service': service, 'form': form})
