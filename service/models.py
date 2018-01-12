@@ -13,10 +13,7 @@ from django.contrib.auth.models import User
 
 class SDb(models.Model):
     name = models.CharField(unique=True, max_length=100, null=True, verbose_name='Название')
-    p_host = models.CharField(max_length=255, null=True, verbose_name='Сервер')
-    p_name = models.CharField(max_length=255, null=True, verbose_name='БД')
-    p_username = models.CharField(max_length=100, null=True, verbose_name='Пользователь')
-    p_password = models.CharField(max_length=100, null=True, verbose_name='Пароль')
+    connect = models.CharField(max_length=255, null=True, verbose_name='Строка подключения')
     comment = models.TextField(blank=True, null=True, verbose_name='Коментарий')
     checked = models.BooleanField(verbose_name='Вкл.', default=True)
 
@@ -27,21 +24,7 @@ class SDb(models.Model):
         verbose_name_plural = 'БД'
 
     def __str__(self):
-        return self.name 
-
-
-class SUserDb(models.Model):
-    user = models.ForeignKey(User, models.DO_NOTHING, null=True, verbose_name='Пользователь')
-    s_db = models.ForeignKey('SDb', models.DO_NOTHING, null=True, verbose_name='БД')
-
-    class Meta:
-        managed = True
-        db_table = 'service_user_db'
-        verbose_name = 'Пользователь <=> БД'
-        verbose_name_plural = 'Пользователи <=> БД'
-
-    def __str__(self):
-        return '{0.user} <=> {0.s_db}'.format(self)
+        return self.name
 
 
 class SUserService(models.Model):
@@ -53,6 +36,20 @@ class SUserService(models.Model):
         db_table = 'service_user_service'
         verbose_name = 'Пользователь <=> Сервис'
         verbose_name_plural = 'Пользователи <=> Сервисы'
+
+
+class SServiceDb(models.Model):
+    s_service = models.ForeignKey('SService', models.DO_NOTHING, null=True, verbose_name='Сервис')
+    s_db = models.ForeignKey('SDb', models.DO_NOTHING, null=True, verbose_name='БД')
+
+    class Meta:
+        managed = True
+        db_table = 'service_service_db'
+        verbose_name = 'Сервис <=> БД'
+        verbose_name_plural = 'Сервисы <=> БД'
+
+    def __str__(self):
+        return '{0.service} <=> {0.s_db}'.format(self)
 
 
 class SLog(models.Model):
@@ -115,6 +112,7 @@ class SType(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class SPage(models.Model):
     name = models.CharField(max_length=100, null=True, verbose_name='Название')

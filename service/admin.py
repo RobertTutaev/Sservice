@@ -1,10 +1,16 @@
 from django.contrib import admin
+from django.forms import TextInput, Textarea
+from django.db import models
 
-from .models import SUserDb, SUserService, SDb, SLog, SQuery, SService, SType, SPage
+from .models import SServiceDb, SUserService, SDb, SLog, SQuery, SService, SType, SPage
 
 class SDbAdmin(admin.ModelAdmin):
-    list_display = ('name', 'p_host', 'p_name', 'checked')
-    search_fields = ('name', 'p_host', 'p_name', 'checked')
+    list_display = ('name', 'checked')
+    search_fields = ('name', 'checked')
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'120'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':120})},
+    }
 
 class SLogAdmin(admin.ModelAdmin):
     list_display = ('info', 'dt')
@@ -58,15 +64,15 @@ class SUserServiceAdmin(admin.ModelAdmin):
     list_display = ('user', 's_service')
     search_fields = ('user__username', 's_service__name')
 
-class SUserDbAdmin(admin.ModelAdmin):
-    list_display = ('user', 's_db')
-    search_fields = ('user__username', 's_db__name')
+class SServiceDbAdmin(admin.ModelAdmin):
+    list_display = ('s_service', 's_db')
+    search_fields = ('s_service__username', 's_db__name')
 
 class SServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'checked')
     search_fields = ('name', )
 
-admin.site.register(SUserDb, SUserDbAdmin)
+admin.site.register(SServiceDb, SServiceDbAdmin)
 admin.site.register(SUserService, SUserServiceAdmin)
 admin.site.register(SDb, SDbAdmin)
 admin.site.register(SLog, SLogAdmin)

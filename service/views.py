@@ -2,9 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponse
 from django.template import Context
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
-from service.models import SPage, SUserService, SService
+from service.models import SDb, SQuery, SPage, SUserService, SService
 from service.forms.main import ServiceForm
+from service.dbs import Query
 
 # Create your views here.
 
@@ -44,7 +46,24 @@ def services(request):
 
 @login_required
 def service(request, id):
-    service = SService.objects.filter(pk=id, suserservice__user=request.user).first()
-    form = ServiceForm()
+    service = SService.objects.filter(pk=id, suserservice__user=request.user).first()    
+
+        # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ServiceForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            # return HttpResponseRedirect('/')
+            query = Query(SDb.objects.filter(pk=6).first())
+
+            query.execSQL(SQuery.objects.filter(pk=2).first(), form.cleaned_data['snils'])
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ServiceForm()
     
     return render(request, 'service.html', {'service': service, 'form': form})
