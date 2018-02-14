@@ -59,3 +59,7 @@ https://www.youtube.com/watch?v=8SXwQ_7VTYM
 Иконки
 =======
 https://icons8.ru/icon/set/%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81/all
+
+007-656-532 56
+008-057-509 32
+162-652-453 64

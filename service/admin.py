@@ -15,7 +15,7 @@ class SDbAdmin(admin.ModelAdmin):
 class SLogAdmin(admin.ModelAdmin):
     list_display = ('info', 'dt')
     search_fields = ('info', 'dt')
-    readonly_fields = ('info', 'dt')   
+    readonly_fields = ('info', 'dt')
 
     def get_actions(self, request):
         actions = super(SLogAdmin, self).get_actions(request)
@@ -55,7 +55,6 @@ class SPageAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-
 class SQueryAdmin(admin.ModelAdmin):
     list_display = ('name', 's_service', 'priority')
     search_fields = ('name', 's_service__name')
@@ -72,6 +71,24 @@ class SServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'checked')
     search_fields = ('name', )
 
+class STypeAdmin(admin.ModelAdmin):
+    readonly_fields = ('name',)
+
+    def get_actions(self, request):
+        actions = super(STypeAdmin, self).get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+
+    def has_add_permission(self, request):
+        return False
+
+    #def has_change_permission(self, request, obj=None):
+    #    return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 admin.site.register(SServiceDb, SServiceDbAdmin)
 admin.site.register(SUserService, SUserServiceAdmin)
 admin.site.register(SDb, SDbAdmin)
@@ -79,4 +96,4 @@ admin.site.register(SLog, SLogAdmin)
 admin.site.register(SQuery, SQueryAdmin)
 admin.site.register(SService, SServiceAdmin)
 admin.site.register(SPage, SPageAdmin)
-admin.site.register(SType)
+admin.site.register(SType, STypeAdmin)

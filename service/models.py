@@ -49,7 +49,7 @@ class SServiceDb(models.Model):
         verbose_name_plural = 'Сервисы <=> БД'
 
     def __str__(self):
-        return '{0.service} <=> {0.s_db}'.format(self)
+        return '{0.s_service} <=> {0.s_db}'.format(self)
 
 
 class SLog(models.Model):
@@ -74,7 +74,7 @@ class SQuery(models.Model):
     priority = models.IntegerField(null=True, verbose_name='Приоритет')
     comment = models.TextField(blank=True, null=True, verbose_name='Комментарий')
     s_type = models.ForeignKey('SType', models.DO_NOTHING, null=True, verbose_name='Тип обработки запроса')
-    result = models.CharField(max_length=255, blank=True, null=True, verbose_name='Значение ответа')
+    result = models.CharField(max_length=255, blank=True, null=True, verbose_name='Ответ')
 
     class Meta:
         managed = True
