@@ -21,7 +21,21 @@
           </table>
         </form>
         <br>
-        {{ result|default_if_none:"" }}
+        {% if results %}
+          <br>
+          
+          <table class="table table-bordered table-responsive">
+            {% for result in results %}
+                <tr>
+                    {% for cell in result %}
+                      <td>
+                        {{ cell }}
+                      </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+          </table>
+        {% endif %}
       </div>
     </div>
 

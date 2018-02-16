@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponse
 from django.template import Context
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 
 from service.models import SDb, SQuery, SPage, SUserService, SService
 from service.forms.main import ServiceForm
@@ -38,20 +38,27 @@ def services(request):
 
 @login_required
 def service(request, id):
-    result = ''
+    results = None    
     service = SService.objects.filter(pk=id, suserservice__user=request.user).first()
-
+    
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = ServiceForm(request.POST)
+        form = ServiceForm(service, request.POST)
+        
         # check whether it's valid:
         if form.is_valid() and service:
-            query = Query(SDb.objects.filter(sservicedb__pk=1).first())
-            result = query.execSQLs(SQuery.objects.filter(pk=1).first(), form.cleaned_data['snils'])
+            query = Query(service, request.POST['db'], form.cleaned_data['snils'])
+            results = query.getData()
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = ServiceForm(request)
-    
-    return render(request, 'service.html', {'service': service, 'form': form, 'result': result})
+        form = ServiceForm(service)
+
+    return render(request, 'service.html', {'service': service, 'form': form, 'results': results})
+
+@login_required
+def api_help(request, id):
+    sService = SService.objects.values('id', 'name').filter(pk=id, suserservice__user=request.user).first()
+    sDbs = SDb.objects.values('id', 'name').filter(sservicedb__s_service = sService)
+    return JsonResponse({'service': sService, 'databases': list(sDbs)})
