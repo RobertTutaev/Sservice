@@ -56,9 +56,3 @@ def service(request, id):
         form = ServiceForm(service)
 
     return render(request, 'service.html', {'service': service, 'form': form, 'results': results})
-
-@login_required
-def api_help(request, id):
-    sService = SService.objects.values('id', 'name').filter(pk=id, suserservice__user=request.user).first()
-    sDbs = SDb.objects.values('id', 'name').filter(sservicedb__s_service = sService)
-    return JsonResponse({'service': sService, 'databases': list(sDbs)})
